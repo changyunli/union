@@ -30,8 +30,8 @@
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
         </property>
 
-    <property name="valueSerializer">
-        <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
-    </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+        </property>
     </bean>
 </beans>
