@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd ">
+
+
+    <!--配置jobdetail-->
+    <bean id="taskjob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.union.job.TaskJob"></property>
+    </bean>
+
+
+    <!--配置trigger-->
+    <bean id="crontrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--注入jobdetail-->
+        <property name="jobDetail" ref="taskjob"></property>
+        <property name="cronExpression" value="0/2 * * * * ? *"></property>
+    </bean>
+
+    <!--配置scheduler-->
+    <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!--注入trigger-->
+        <property name="triggers">
+            <list>
+                <ref bean="crontrigger"></ref>
+            </list>
+        </property>
+    </bean>
+
+</beans>
